@@ -9,6 +9,9 @@ dotenv.config();
 if (process.env.APP_NAME) {
     // loggingListener();
     connection.authenticate().then(() => {
+        if(process.env.NODE_ENV == 'development') {
+            require('./config/dbMigrate');
+        }
         server.listen(process.env.APP_PORT, '0.0.0.0', () => {
             if(server.listening) {
                 console.log('is listening');

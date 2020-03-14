@@ -1,23 +1,23 @@
 const connection = require('../../config/dbConn');
 const Sequelize = require('sequelize');
 
-const BloodType = connection.define('BloodType', {
+const Gender = connection.define('gender', {
     id: {
         type: Sequelize.INTEGER,
         defaultValue: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-    Type: {
-        type: Sequelize.CHAR(2),
+    gender: {
+        type: Sequelize.STRING,
         allowNull: false,
-        unique: true, 
-    }
+        unique: true,
+    },
 }, {
     freezeTableName: true,
-    tableName: 'BloodType',
-    paranoid: true,
+    tableName: 'Gender',
     timestamps: false,
+    paranoid: true,
 });
 
-module.exports = BloodType;
+module.exports = Gender;

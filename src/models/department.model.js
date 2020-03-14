@@ -8,6 +8,11 @@ const Department = connection.define('department', {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV1,
     },
+    businessId: {
+        type: Sequelize.CHAR,
+        allowNull: false,
+        unique: true
+    },
     Name: {
         type: Sequelize.STRING,
         allowNull: false,

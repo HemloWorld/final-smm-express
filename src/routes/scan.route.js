@@ -10,9 +10,9 @@ const Gender = require('../models/gender.model');
 const UserService = require('../services/user.service');
 const userService = new UserService(User, BloodType, Department, Absence, Gender);
 
-const {getAll, getById} = require('../controllers/user.controller');
+const {getById} = require('../controllers/user.controller');
 
-router.get('/', (req, res) => {getAll(req, res, userService)});
-router.get('/:id', (req, res) => {getById(req, res, userService)});
+
+router.use('/:id/:type', (req, res) => {getById(req, res, userService)});
 
 module.exports = router;

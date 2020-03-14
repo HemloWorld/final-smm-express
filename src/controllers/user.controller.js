@@ -11,8 +11,23 @@ const getAll = async (req, res, service) => {
 
 const getById = async (req, res, service) => {
     try {
-        const uid = req.params.id;
-        const result = await service.fetchById(uid);
+        const type = req.params.type;
+        const id = req.params.id;
+
+        let result;
+        switch (type) {
+            case 'nfc':
+                result = await service.fetchByNfcId(id);
+                break;
+            
+            case 'qr':
+                result = await service.fetchByQrId(id);
+                break;
+
+            default:
+                result = await service.fetchById(id);
+                break;
+        }
 
         res.status(200);
         res.json(result);
@@ -21,15 +36,4 @@ const getById = async (req, res, service) => {
     }
 }
 
-const getByNfcId = async (req, res, service) => {
-    try {
-        const uid = req.params.id;
-        const result = await service.fetchByNfcId(uid);
-
-        res.status(200);
-        res.json(result);
-    } catch (e) {
-        //add logger
-    }
-}
-module.exports = {getAll, getById, getByNfcId};
+module.exports = {getAll, getById};
