@@ -1,3 +1,6 @@
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+
 class UserService {
     constructor(user, bloodType, department, absence, gender) {
         this.user = user;
@@ -82,17 +85,38 @@ class UserService {
 
     async fetchAbsence(date) {
         try {
-            const result = await this.user.findAll(
+            const result = await this.absence.findAll(
                 {
                     //TODO: finish the include
-                    where: { absences: date },
-                    // include: {mode: this.user, attributes: ['Name', '']},
+                    where: {
+                        datetime: {
+                            [Op.like]: `%${date}%`,
+                        }
+                    },
+                    include: { model: this.user, attributes: ['Name'] },
                 }
             );
 
             return result;
         } catch (e) {
             //add logger
+            console.log(e);
+            throw (e);
+        }
+    }
+
+    async postAbsence(body, id) {
+        try {
+            const result = await this.absence.create(
+                {
+                    datetime: body.datetime,
+                    userId: id,
+                }
+            );
+
+            return result;
+        } catch (e) {
+            // add logger
             console.log(e);
             throw (e);
         }

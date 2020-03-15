@@ -1,7 +1,7 @@
 const getAll = async (req, res, service) => {
     try {
         const result = await service.fetchAll();
-        
+
         res.status(200);
         res.json(result);
     } catch (e) {
@@ -19,7 +19,7 @@ const getById = async (req, res, service) => {
             case 'nfc':
                 result = await service.fetchByNfcId(id);
                 break;
-            
+
             case 'qr':
                 result = await service.fetchByQrId(id);
                 break;
@@ -36,4 +36,29 @@ const getById = async (req, res, service) => {
     }
 }
 
-module.exports = {getAll, getById};
+const getByDate = async (req, res, service) => {
+    try {
+        const date = req.params.date;
+        const result = await service.fetchAbsence(date);
+
+        res.status(200);
+        res.json(result);
+    } catch (e) {
+        //add logger
+    }
+}
+
+const newAbsence = async (req, res, service) => {
+    try {
+        const body = req.body;
+        const id = req.params.id;
+        const result = await service.postAbsence(body, id);
+
+        res.status(200);
+        res.json(result);
+    } catch (e) {
+        //add logger
+    }
+}
+
+module.exports = { getAll, getById, getByDate, newAbsence};

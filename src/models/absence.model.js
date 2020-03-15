@@ -9,7 +9,7 @@ const Absence = connection.define('absence', {
         allowNull: false,
     },
     datetime: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false,
     },
 }, {
