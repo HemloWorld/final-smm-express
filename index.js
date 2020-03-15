@@ -1,13 +1,12 @@
 const server = require('./src/server');
 const dotenv = require('dotenv');
 const connection = require('./config/dbConn')
-// require('./config/dbMigrate');
-// const loggingListener = require('./src/events/logging.listener');
-// const logEmitter = require('./src/events/logEmitter');
+const loggingListener = require('./src/events/logging.listener');
+const logEmitter = require('./src/events/logEmitter');
 dotenv.config();
 
 if (process.env.APP_NAME) {
-    // loggingListener();
+    loggingListener();
     connection.authenticate().then(() => {
         if(process.env.NODE_ENV == 'development') {
             require('./config/dbMigrate');
@@ -16,17 +15,16 @@ if (process.env.APP_NAME) {
             if(server.listening) {
                 console.log('is listening');
                 
-                // logEmitter.emit('APP-INFO', {
-                //     logTitle: "SERVER LISTENING",
-                //     logMessage: `Server is listening on port ${process.env.APP_PORT}`
-                // });
+                logEmitter.emit('APP-INFO', {
+                    logTitle: "SERVER LISTENING",
+                    logMessage: `Server is listening on port ${process.env.APP_PORT}`
+                });
             };
         });
-    }).catch((rej) => {
-        console.log(rej);
-        // logEmitter.emit('APP-FATAL', {
-        //     logTitle: "DATABASE CANNOT CONNECT",
-        //     logMessage: rej.message
-        // });
+    }).catch((e) => {
+        logEmitter.emit('APP-FATAL', {
+            logTitle: "DATABASE CANNOT CONNECT",
+            logMessage: e.message
+        });
     });
 } else process.exit(1);

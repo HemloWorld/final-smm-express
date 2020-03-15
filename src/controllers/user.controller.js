@@ -1,11 +1,12 @@
 const getAll = async (req, res, service) => {
     try {
-        const result = await service.fetchAll();
+        const result = await service.fetchAllUser();
 
         res.status(200);
         res.json(result);
     } catch (e) {
-        //add logger
+        res.status(500);
+        res.json({errorCode: e});
     }
 }
 
@@ -17,22 +18,23 @@ const getById = async (req, res, service) => {
         let result;
         switch (type) {
             case 'nfc':
-                result = await service.fetchByNfcId(id);
+                result = await service.fetchUserByNfcId(id);
                 break;
 
             case 'qr':
-                result = await service.fetchByQrId(id);
+                result = await service.fetchUserByQrId(id);
                 break;
 
             default:
-                result = await service.fetchById(id);
+                result = await service.fetchUserById(id);
                 break;
         }
 
         res.status(200);
         res.json(result);
     } catch (e) {
-        //add logger
+        res.status(500);
+        res.json({errorCode: e});
     }
 }
 
@@ -44,7 +46,8 @@ const getByDate = async (req, res, service) => {
         res.status(200);
         res.json(result);
     } catch (e) {
-        //add logger
+        res.status(500);
+        res.json({errorCode: e});
     }
 }
 
@@ -57,7 +60,8 @@ const newAbsence = async (req, res, service) => {
         res.status(200);
         res.json(result);
     } catch (e) {
-        //add logger
+        res.status(500);
+        res.json({errorCode: e});
     }
 }
 

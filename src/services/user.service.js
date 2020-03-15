@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const logEmitter = require('../events/logEmitter');
 
 class UserService {
     constructor(user, bloodType, department, absence, gender) {
@@ -10,7 +11,7 @@ class UserService {
         this.gender = gender;
     }
 
-    async fetchAll() {
+    async fetchAllUser() {
         try {
             const result = await this.user.findAll(
                 {
@@ -19,17 +20,18 @@ class UserService {
                     this.department,
                     this.absence]
                 });
-            // const result = await this.department.findAll({include: [{model: this.user, include: this.bloodType}]});
             return result;
         } catch (e) {
-            //add logger
-            console.log(e);
-            throw (e);
+            logEmitter.emit('APP-ERROR', {
+                logTitle: "FETCH ALL USER LIST SERVICE FAILED",
+                logMessage: e
+            });
+            throw new Error('E201');
         }
 
     }
 
-    async fetchById(id) {
+    async fetchUserById(id) {
         try {
             const result = await this.user.findOne(
                 {
@@ -41,13 +43,15 @@ class UserService {
                 });
             return result;
         } catch (e) {
-            //add logger
-            console.log(e);
-            throw (e);
+            logEmitter.emit('APP-ERROR', {
+                logTitle: "FETCH USER DATA BY USER ID SERVICE FAILED",
+                logMessage: e
+            });
+            throw new Error('E202');
         }
     }
 
-    async fetchByNfcId(id) {
+    async fetchUserByNfcId(id) {
         try {
             const result = await this.user.findOne(
                 {
@@ -59,13 +63,15 @@ class UserService {
                 });
             return result;
         } catch (e) {
-            //add logger
-            console.log(e);
-            throw (e);
+            logEmitter.emit('APP-ERROR', {
+                logTitle: "FETCH USER DATA BY NFC ID SERVICE FAILED",
+                logMessage: e
+            });
+            throw new Error('E203');
         }
     }
 
-    async fetchByQrId(id) {
+    async fetchUserByQrId(id) {
         try {
             const result = await this.user.findOne(
                 {
@@ -77,9 +83,11 @@ class UserService {
                 });
             return result;
         } catch (e) {
-            //add logger
-            console.log(e);
-            throw (e);
+            logEmitter.emit('APP-ERROR', {
+                logTitle: "FETCH USER DATA BY QR ID SERVICE FAILED",
+                logMessage: e
+            });
+            throw new Error('E204');
         }
     }
 
@@ -99,9 +107,11 @@ class UserService {
 
             return result;
         } catch (e) {
-            //add logger
-            console.log(e);
-            throw (e);
+            logEmitter.emit('APP-ERROR', {
+                logTitle: "FETCH ABSENCE DATA BY DATE SERVICE FAILED",
+                logMessage: e
+            });
+            throw new Error('E205');
         }
     }
 
@@ -116,9 +126,11 @@ class UserService {
 
             return result;
         } catch (e) {
-            // add logger
-            console.log(e);
-            throw (e);
+            logEmitter.emit('APP-ERROR', {
+                logTitle: "POST NEW ABSENCE DATA SERVICE FAILED",
+                logMessage: e
+            });
+            throw new Error('E206');
         }
     }
 }

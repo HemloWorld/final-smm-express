@@ -10,12 +10,10 @@ app.use(routeIndex);
 
 const server = http.createServer(app);
 server.on('error', function(ev) {
-    console.log(ev.message);
-
-    // logEmitter.emit('APP-ERROR', {
-    //     logTitle: "SERVER ERROR",
-    //     logMessage: ev.message
-    // });
+    logEmitter.emit('APP-ERROR', {
+        logTitle: "SERVER ERROR",
+        logMessage: ev.message
+    });
 });
 
 module.exports = server;
