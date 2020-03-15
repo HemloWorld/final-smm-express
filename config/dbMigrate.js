@@ -22,8 +22,8 @@ const dbMigrate = async () => {
     const depart2 = await Department.create({ Name: 'K3', businessId: 'A02' });
     const depart3 = await Department.create({ Name: 'Research', businessId: 'A03' });
 
-    const gender1 = await Gender.create({ gender: 'Male' , id: 0});
-    const gender2 = await Gender.create({ gender: 'Female' , id: 0});
+    const gender1 = await Gender.create({ gender: 'Male', id: 0 });
+    const gender2 = await Gender.create({ gender: 'Female', id: 0 });
 
     const user1 = await User.create({
         Name: 'Rio Arswendo',
@@ -85,23 +85,38 @@ const dbMigrate = async () => {
     await user5.setDepartment(depart1);
     await user5.setGender(gender1);
 
-    const abs1 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-    const abs2 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-    const abs3 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-    const abs4 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-    const abs5 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-    const abs6 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-    const abs7 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-    const abs8 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
-
-    await abs1.setUser(user1);
-    await abs6.setUser(user1);
-    await abs7.setUser(user1);
-    await abs8.setUser(user1);
-    await abs2.setUser(user2);
-    await abs3.setUser(user3);
-    await abs4.setUser(user4);
-    await abs5.setUser(user5);
+    setTimeout(async () => {
+        const abs1 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+        await abs1.setUser(user1);
+        setTimeout(async () => {
+            const abs2 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+            await abs2.setUser(user2);
+            setTimeout(async () => {
+                const abs3 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                await abs3.setUser(user3);
+                setTimeout(async () => {
+                    const abs4 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                    await abs4.setUser(user4);
+                    setTimeout(async () => {
+                        const abs5 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                        await abs5.setUser(user5);
+                        setTimeout(async () => {
+                            const abs6 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                            await abs6.setUser(user1);
+                            setTimeout(async () => {
+                                const abs7 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                                await abs7.setUser(user1);
+                                setTimeout(async () => {
+                                    const abs8 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                                    await abs8.setUser(user1);
+                                }, 2000);
+                            }, 2000);
+                        }, 2000);                    
+                    }, 2000);                
+                }, 2000);
+            }, 2000);
+        }, 2000);
+    }, 2000);
 }
 
 dbMigrate();

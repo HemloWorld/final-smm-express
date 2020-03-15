@@ -6,7 +6,7 @@ const getAll = async (req, res, service) => {
         res.json(result);
     } catch (e) {
         res.status(500);
-        res.json({errorCode: e});
+        res.json({ errorCode: e.message });
     }
 }
 
@@ -25,6 +25,10 @@ const getById = async (req, res, service) => {
                 result = await service.fetchUserByQrId(id);
                 break;
 
+            case 'name':
+                result = await service.fetchUserByName(id);
+                break;
+
             default:
                 result = await service.fetchUserById(id);
                 break;
@@ -34,7 +38,7 @@ const getById = async (req, res, service) => {
         res.json(result);
     } catch (e) {
         res.status(500);
-        res.json({errorCode: e});
+        res.json({ errorCode: e.message });
     }
 }
 
@@ -47,7 +51,7 @@ const getByDate = async (req, res, service) => {
         res.json(result);
     } catch (e) {
         res.status(500);
-        res.json({errorCode: e});
+        res.json({ errorCode: e.message });
     }
 }
 
@@ -61,8 +65,8 @@ const newAbsence = async (req, res, service) => {
         res.json(result);
     } catch (e) {
         res.status(500);
-        res.json({errorCode: e});
+        res.json({ errorCode: e.message });
     }
 }
 
-module.exports = { getAll, getById, getByDate, newAbsence};
+module.exports = { getAll, getById, getByDate, newAbsence };

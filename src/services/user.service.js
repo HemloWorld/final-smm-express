@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const logEmitter = require('../events/logEmitter');
+const moment = require('moment');
 
 class UserService {
     constructor(user, bloodType, department, absence, gender) {
@@ -18,7 +19,10 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence]
+                    this.absence],
+                    order: [
+                        [{ model: this.absence }, 'datetime', 'desc']
+                    ]
                 });
             return result;
         } catch (e) {
@@ -39,7 +43,10 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence]
+                    this.absence],
+                    order: [
+                        [{ model: this.absence }, 'datetime', 'desc']
+                    ]
                 });
             return result;
         } catch (e) {
@@ -59,7 +66,10 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence]
+                    this.absence],
+                    order: [
+                        [{ model: this.absence }, 'datetime', 'desc']
+                    ]
                 });
             return result;
         } catch (e) {
@@ -79,7 +89,10 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence]
+                    this.absence],
+                    order: [
+                        [{ model: this.absence }, 'datetime', 'desc']
+                    ]
                 });
             return result;
         } catch (e) {
@@ -95,7 +108,6 @@ class UserService {
         try {
             const result = await this.absence.findAll(
                 {
-                    //TODO: finish the include
                     where: {
                         datetime: {
                             [Op.like]: `%${date}%`,
@@ -131,6 +143,35 @@ class UserService {
                 logMessage: e
             });
             throw new Error('E206');
+        }
+    }
+
+    async fetchUserByName(name) {
+        try {
+            const result = await this.user.findAll(
+                {
+                    where: {
+                        Name: {
+                            [Op.like]: `%${name}%`
+                        }
+                    },
+                    attributes: ['Name'],
+                    include: {
+                        model: this.absence,
+                        separate: true,
+                        limit: 1,
+                        order: [['datetime', 'desc']],
+                    },
+                }
+            );
+
+            return result;
+        } catch (e) {
+            logEmitter.emit('APP-ERROR', {
+                logTitle: "FETCH USER DATA BY NAME SERVICE FAILED",
+                logMessage: e
+            });
+            throw new Error('E207');
         }
     }
 }
