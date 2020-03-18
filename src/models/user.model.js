@@ -24,7 +24,7 @@ const User = connection.define('user', {
         allowNull: false,
     },
     Birth: {
-        type: Sequelize.DATE,
+        type: Sequelize.STRING,
         allowNull: false,
     },
     Email: {
