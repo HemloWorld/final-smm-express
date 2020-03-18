@@ -13,7 +13,7 @@ const Department = connection.define('department', {
         allowNull: false,
         unique: true
     },
-    Name: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,

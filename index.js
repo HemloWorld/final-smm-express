@@ -12,9 +12,7 @@ if (process.env.APP_NAME) {
             require('./config/dbMigrate');
         }
         server.listen(process.env.APP_PORT, '0.0.0.0', () => {
-            if(server.listening) {
-                console.log('is listening');
-                
+            if(server.listening) {                
                 logEmitter.emit('APP-INFO', {
                     logTitle: "SERVER LISTENING",
                     logMessage: `Server is listening on port ${process.env.APP_PORT}`

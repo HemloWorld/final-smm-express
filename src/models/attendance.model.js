@@ -1,7 +1,7 @@
 const connection = require('../../config/dbConn');
 const Sequelize = require('sequelize');
 
-const Absence = connection.define('absence', {
+const Attendance = connection.define('attendance', {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
@@ -14,10 +14,10 @@ const Absence = connection.define('absence', {
     },
 }, {
     freezeTableName: true,
-    tableName: "Absence",
+    tableName: "Attendance",
     paranoid: true,
     timestamps: false,
 });
 
-module.exports = Absence;
+module.exports = Attendance;
 

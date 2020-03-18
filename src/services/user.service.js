@@ -4,11 +4,11 @@ const logEmitter = require('../events/logEmitter');
 const moment = require('moment');
 
 class UserService {
-    constructor(user, bloodType, department, absence, gender) {
+    constructor(user, bloodType, department, attendance, gender) {
         this.user = user;
         this.bloodType = bloodType;
         this.department = department;
-        this.absence = absence;
+        this.attendance = attendance;
         this.gender = gender;
     }
 
@@ -19,9 +19,9 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence],
+                    this.attendance],
                     order: [
-                        [{ model: this.absence }, 'datetime', 'desc']
+                        [{ model: this.attendance }, 'datetime', 'desc']
                     ]
                 });
             return result;
@@ -43,9 +43,9 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence],
+                    this.attendance],
                     order: [
-                        [{ model: this.absence }, 'datetime', 'desc']
+                        [{ model: this.attendance }, 'datetime', 'desc']
                     ]
                 });
             return result;
@@ -62,13 +62,13 @@ class UserService {
         try {
             const result = await this.user.findOne(
                 {
-                    where: { NFCid: id },
+                    where: { nfcId: id },
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence],
+                    this.attendance],
                     order: [
-                        [{ model: this.absence }, 'datetime', 'desc']
+                        [{ model: this.attendance }, 'datetime', 'desc']
                     ]
                 });
             return result;
@@ -85,13 +85,13 @@ class UserService {
         try {
             const result = await this.user.findOne(
                 {
-                    where: { QRid: id },
+                    where: { qrId: id },
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.absence],
+                    this.attendance],
                     order: [
-                        [{ model: this.absence }, 'datetime', 'desc']
+                        [{ model: this.attendance }, 'datetime', 'desc']
                     ]
                 });
             return result;
@@ -106,14 +106,14 @@ class UserService {
 
     async fetchAbsence(date) {
         try {
-            const result = await this.absence.findAll(
+            const result = await this.attendance.findAll(
                 {
                     where: {
                         datetime: {
                             [Op.like]: `%${date}%`,
                         }
                     },
-                    include: { model: this.user, attributes: ['Name'] },
+                    include: { model: this.user, attributes: ['name'] },
                 }
             );
 
@@ -129,7 +129,7 @@ class UserService {
 
     async postAbsence(body, id) {
         try {
-            const result = await this.absence.create(
+            const result = await this.attendance.create(
                 {
                     datetime: body.datetime,
                     userId: id,
@@ -151,13 +151,13 @@ class UserService {
             const result = await this.user.findAll(
                 {
                     where: {
-                        Name: {
+                        name: {
                             [Op.like]: `%${name}%`
                         }
                     },
-                    attributes: ['Name'],
+                    attributes: ['name'],
                     include: {
-                        model: this.absence,
+                        model: this.attendance,
                         separate: true,
                         limit: 1,
                         order: [['datetime', 'desc']],

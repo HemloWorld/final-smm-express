@@ -2,7 +2,7 @@ const connection = require('./dbConn');
 const User = require('../src/models/user.model');
 const BloodType = require('../src/models/btype.model');
 const Department = require('../src/models/department.model');
-const Absence = require('../src/models/absence.model');
+const Attendance = require('../src/models/attendance.model');
 const Gender = require('../src/models/gender.model');
 const dbAssociation = require('../src/models/index');
 const moment = require('moment');
@@ -13,24 +13,24 @@ const dbMigrate = async () => {
     dbAssociation();
     await connection.sync({ force: true });
 
-    const btype1 = await BloodType.create({ Type: 'A', id: 0 });
-    const btype2 = await BloodType.create({ Type: 'B', id: 0 });
-    const btype3 = await BloodType.create({ Type: 'O', id: 0 });
-    const btype4 = await BloodType.create({ Type: 'AB', id: 0 });
+    const btype1 = await BloodType.create({ type: 'A', id: 0 });
+    const btype2 = await BloodType.create({ type: 'B', id: 0 });
+    const btype3 = await BloodType.create({ type: 'O', id: 0 });
+    const btype4 = await BloodType.create({ type: 'AB', id: 0 });
 
-    const depart1 = await Department.create({ Name: 'Miner', businessId: 'A01' });
-    const depart2 = await Department.create({ Name: 'K3', businessId: 'A02' });
-    const depart3 = await Department.create({ Name: 'Research', businessId: 'A03' });
+    const depart1 = await Department.create({ name: 'Miner', businessId: 'A01' });
+    const depart2 = await Department.create({ name: 'K3', businessId: 'A02' });
+    const depart3 = await Department.create({ name: 'Research', businessId: 'A03' });
 
     const gender1 = await Gender.create({ gender: 'Male', id: 0 });
     const gender2 = await Gender.create({ gender: 'Female', id: 0 });
 
     const user1 = await User.create({
-        Name: 'Rio Arswendo',
-        Birth: '2000-12-14',
-        Email: 'r.arswendo.r@gmail.com',
-        Phone: '08986995760',
-        PhotoUrl: 'https://dummyimage.com/600x400/000/fff',
+        name: 'Rio Arswendo',
+        birth: '2000-12-14',
+        email: 'r.arswendo.r@gmail.com',
+        phone: '08986995760',
+        photoUrl: 'https://dummyimage.com/600x400/000/fff',
     });
 
     await user1.setBloodType(btype4);
@@ -38,11 +38,11 @@ const dbMigrate = async () => {
     await user1.setGender(gender1);
 
     const user2 = await User.create({
-        Name: 'Ruslan',
-        Birth: '2001-01-21',
-        Email: 'ruslanou@gmail.com',
-        Phone: '089883795760',
-        PhotoUrl: 'https://dummyimage.com/600x400/000/fff',
+        name: 'Ruslan',
+        birth: '2001-01-21',
+        email: 'ruslanou@gmail.com',
+        phone: '089883795760',
+        photoUrl: 'https://dummyimage.com/600x400/000/fff',
     });
 
     await user2.setBloodType(btype1);
@@ -50,11 +50,11 @@ const dbMigrate = async () => {
     await user2.setGender(gender1);
 
     const user3 = await User.create({
-        Name: 'Afina',
-        Birth: '2003-1-2',
-        Email: 'afinaisme@gmail.com',
-        Phone: '08986783623',
-        PhotoUrl: 'https://dummyimage.com/600x400/000/fff',
+        name: 'Afina',
+        birth: '2003-1-2',
+        email: 'afinaisme@gmail.com',
+        phone: '08986783623',
+        photoUrl: 'https://dummyimage.com/600x400/000/fff',
     });
 
     await user3.setBloodType(btype2);
@@ -62,11 +62,11 @@ const dbMigrate = async () => {
     await user3.setGender(gender2);
 
     const user4 = await User.create({
-        Name: 'Aris',
-        Birth: '1994-10-9',
-        Email: 'aris@gmail.com',
-        Phone: '08986938760',
-        PhotoUrl: 'https://dummyimage.com/600x400/000/fff',
+        name: 'Aris',
+        birth: '1994-10-9',
+        email: 'aris@gmail.com',
+        phone: '08986938760',
+        photoUrl: 'https://dummyimage.com/600x400/000/fff',
     });
 
     await user4.setBloodType(btype3);
@@ -74,11 +74,11 @@ const dbMigrate = async () => {
     await user4.setGender(gender1);
 
     const user5 = await User.create({
-        Name: 'Dennis',
-        Birth: '2000-2-12',
-        Email: 'dennis@gmail.com',
-        Phone: '089868463923',
-        PhotoUrl: 'https://dummyimage.com/600x400/000/fff',
+        name: 'Dennis',
+        birth: '2000-2-12',
+        email: 'dennis@gmail.com',
+        phone: '089868463923',
+        photoUrl: 'https://dummyimage.com/600x400/000/fff',
     });
 
     await user5.setBloodType(btype1);
@@ -86,28 +86,28 @@ const dbMigrate = async () => {
     await user5.setGender(gender1);
 
     setTimeout(async () => {
-        const abs1 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+        const abs1 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
         await abs1.setUser(user1);
         setTimeout(async () => {
-            const abs2 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+            const abs2 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
             await abs2.setUser(user2);
             setTimeout(async () => {
-                const abs3 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                const abs3 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
                 await abs3.setUser(user3);
                 setTimeout(async () => {
-                    const abs4 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                    const abs4 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
                     await abs4.setUser(user4);
                     setTimeout(async () => {
-                        const abs5 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                        const abs5 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
                         await abs5.setUser(user5);
                         setTimeout(async () => {
-                            const abs6 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                            const abs6 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
                             await abs6.setUser(user1);
                             setTimeout(async () => {
-                                const abs7 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                                const abs7 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
                                 await abs7.setUser(user1);
                                 setTimeout(async () => {
-                                    const abs8 = await Absence.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                                    const abs8 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
                                     await abs8.setUser(user1);
                                 }, 2000);
                             }, 2000);

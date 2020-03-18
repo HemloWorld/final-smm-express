@@ -8,7 +8,7 @@ const BloodType = connection.define('BloodType', {
         autoIncrement: true,
         primaryKey: true,
     },
-    Type: {
+    type: {
         type: Sequelize.CHAR(2),
         allowNull: false,
         unique: true, 

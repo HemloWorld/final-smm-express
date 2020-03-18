@@ -8,37 +8,37 @@ const User = connection.define('user', {
         allowNull: false,
         primaryKey: true,
     },
-    QRid: {
+    qrId: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
         allowNull: false,
     },
-    NFCid: {
+    nfcId: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV1,
         allowNull: false,
         unique: true,
     },
-    Name: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    Birth: {
+    birth: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    Email: {
+    email: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
             isEmail: true,
         }
     },
-    Phone: {
+    phone: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    PhotoUrl: {
+    photoUrl: {
         type: Sequelize.STRING,
         allowNull: false,
     },

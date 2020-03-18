@@ -1,7 +1,7 @@
 const User = require('./user.model');
 const BloodType = require('./btype.model');
 const Department = require('./department.model');
-const Absence = require('./absence.model');
+const Attendance = require('./attendance.model');
 const Gender = require('./gender.model');
 
 const dbAssociation = () => {
@@ -11,8 +11,8 @@ const dbAssociation = () => {
     BloodType.hasMany(User);
     User.belongsTo(BloodType);
 
-    User.hasMany(Absence);
-    Absence.belongsTo(User);
+    User.hasMany(Attendance);
+    Attendance.belongsTo(User);
 
     Gender.hasMany(User);
     User.belongsTo(Gender);
