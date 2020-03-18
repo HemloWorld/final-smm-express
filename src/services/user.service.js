@@ -157,8 +157,8 @@ class UserService {
                     },
                     attributes: ['Name'],
                     include: {
-                        model: this.absence,
                         separate: true,
+                        model: this.absence,
                         limit: 1,
                         order: [['datetime', 'desc']],
                     },
