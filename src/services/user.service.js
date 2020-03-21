@@ -19,10 +19,15 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.attendance],
-                    order: [
-                        [{ model: this.attendance }, 'datetime', 'desc']
-                    ]
+                    {
+                        model: this.attendance,
+                        separate: true,
+                        order: [['date', 'desc'], ['time', 'desc']],
+                    }],
+                    attributes: ['id', 'qrId',
+                        'nfcId', 'name',
+                        'birth', 'email',
+                        'phone', 'photoUrl'],
                 });
             return result;
         } catch (e) {
@@ -43,10 +48,15 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.attendance],
-                    order: [
-                        [{ model: this.attendance }, 'datetime', 'desc']
-                    ]
+                    {
+                        model: this.attendance,
+                        separate: true,
+                        order: [['date', 'desc'], ['time', 'desc']],
+                    }],
+                    attributes: ['id', 'qrId',
+                        'nfcId', 'name',
+                        'birth', 'email',
+                        'phone', 'photoUrl'],
                 });
             return result;
         } catch (e) {
@@ -66,10 +76,15 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.attendance],
-                    order: [
-                        [{ model: this.attendance }, 'datetime', 'desc']
-                    ]
+                    {
+                        model: this.attendance,
+                        separate: true,
+                        order: [['date', 'desc'], ['time', 'desc']],
+                    }],
+                    attributes: ['id', 'qrId',
+                        'nfcId', 'name',
+                        'birth', 'email',
+                        'phone', 'photoUrl'],
                 });
             return result;
         } catch (e) {
@@ -89,11 +104,17 @@ class UserService {
                     include: [this.gender,
                     this.bloodType,
                     this.department,
-                    this.attendance],
-                    order: [
-                        [{ model: this.attendance }, 'datetime', 'desc']
-                    ]
+                    {
+                        model: this.attendance,
+                        separate: true,
+                        order: [['date', 'desc'], ['time', 'desc']],
+                    }],
+                    attributes: ['id', 'qrId',
+                        'nfcId', 'name',
+                        'birth', 'email',
+                        'phone', 'photoUrl'],
                 });
+            console.log(result);
             return result;
         } catch (e) {
             logEmitter.emit('APP-ERROR', {
@@ -109,7 +130,7 @@ class UserService {
             const result = await this.attendance.findAll(
                 {
                     where: {
-                        datetime: {
+                        date: {
                             [Op.like]: `%${date}%`,
                         }
                     },
@@ -155,12 +176,14 @@ class UserService {
                             [Op.like]: `%${name}%`
                         }
                     },
-                    attributes: ['name'],
+                    attributes: ['id', 'qrId',
+                        'nfcId', 'name',
+                        'birth', 'email',
+                        'phone', 'photoUrl'],
                     include: [{
                         model: this.attendance,
                         separate: true,
-                        limit: 1,
-                        order: [['datetime', 'desc']],
+                        order: [['date', 'desc'], ['time', 'desc']],
                     }, this.department],
                 }
             );

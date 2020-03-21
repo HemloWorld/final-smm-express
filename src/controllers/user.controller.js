@@ -34,8 +34,13 @@ const getById = async (req, res, service) => {
                 break;
         }
 
-        res.status(200);
-        res.json(result);
+        if (result) {
+            res.status(200);
+            res.json(result);
+        } else {
+            res.status(404);
+            res.json([]);
+        }
     } catch (e) {
         res.status(500);
         res.json({ errorCode: e.message });

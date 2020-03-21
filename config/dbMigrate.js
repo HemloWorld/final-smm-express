@@ -86,33 +86,33 @@ const dbMigrate = async () => {
     await user5.setGender(gender1);
 
     setTimeout(async () => {
-        const abs1 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+        const abs1 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
         await abs1.setUser(user1);
         setTimeout(async () => {
-            const abs2 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+            const abs2 = await Attendance.create({ date: '2020-03-04', time: moment().format('HH:mm:ss') });
             await abs2.setUser(user2);
             setTimeout(async () => {
-                const abs3 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                const abs3 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                 await abs3.setUser(user3);
                 setTimeout(async () => {
-                    const abs4 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                    const abs4 = await Attendance.create({ date: '2020-03-01', time: moment().format('HH:mm:ss') });
                     await abs4.setUser(user4);
                     setTimeout(async () => {
-                        const abs5 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                        const abs5 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                         await abs5.setUser(user5);
                         setTimeout(async () => {
-                            const abs6 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                            const abs6 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                             await abs6.setUser(user1);
                             setTimeout(async () => {
-                                const abs7 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                                const abs7 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                                 await abs7.setUser(user1);
                                 setTimeout(async () => {
-                                    const abs8 = await Attendance.create({ datetime: moment().format(process.env.DATE_FORMAT) });
+                                    const abs8 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                                     await abs8.setUser(user1);
                                 }, 2000);
                             }, 2000);
-                        }, 2000);                    
-                    }, 2000);                
+                        }, 2000);
+                    }, 2000);
                 }, 2000);
             }, 2000);
         }, 2000);

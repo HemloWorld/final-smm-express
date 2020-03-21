@@ -8,10 +8,14 @@ const Attendance = connection.define('attendance', {
         primaryKey: true,
         allowNull: false,
     },
-    datetime: {
+    date: {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    time: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    }
 }, {
     freezeTableName: true,
     tableName: "Attendance",
