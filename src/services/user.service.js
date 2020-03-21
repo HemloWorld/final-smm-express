@@ -156,12 +156,12 @@ class UserService {
                         }
                     },
                     attributes: ['name'],
-                    include: {
+                    include: [{
                         model: this.attendance,
                         separate: true,
                         limit: 1,
                         order: [['datetime', 'desc']],
-                    },
+                    }, this.department],
                 }
             );
 
