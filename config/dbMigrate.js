@@ -30,7 +30,7 @@ const dbMigrate = async () => {
         birth: '2000-12-14',
         email: 'r.arswendo.r@gmail.com',
         phone: '08986995760',
-        photoUrl: 'https://dummyimage.com/600x400/000/fff',
+        photoUrl: 'https://dummyimage.com/600x400/000/fff&text=Rio',
     });
 
     await user1.setBloodType(btype4);
@@ -42,7 +42,7 @@ const dbMigrate = async () => {
         birth: '2001-01-21',
         email: 'ruslanou@gmail.com',
         phone: '089883795760',
-        photoUrl: 'https://dummyimage.com/600x400/5352/fff',
+        photoUrl: 'https://dummyimage.com/600x400/5352/fff&text=Ruslan',
     });
 
     await user2.setBloodType(btype1);
@@ -54,7 +54,7 @@ const dbMigrate = async () => {
         birth: '2003-01-02',
         email: 'afinaisme@gmail.com',
         phone: '08986783623',
-        photoUrl: 'https://dummyimage.com/600x400/786/fff',
+        photoUrl: 'https://dummyimage.com/600x400/786/fff&text=Afina',
     });
 
     await user3.setBloodType(btype2);
@@ -66,7 +66,7 @@ const dbMigrate = async () => {
         birth: '1994-10-09',
         email: 'aris@gmail.com',
         phone: '08986938760',
-        photoUrl: 'https://dummyimage.com/600x400/9999/fff',
+        photoUrl: 'https://dummyimage.com/600x400/9999/fff&text=Aris',
     });
 
     await user4.setBloodType(btype3);
@@ -78,7 +78,7 @@ const dbMigrate = async () => {
         birth: '2000-02-12',
         email: 'dennis@gmail.com',
         phone: '089868463923',
-        photoUrl: 'https://dummyimage.com/600x400/00ff0d/fff',
+        photoUrl: 'https://dummyimage.com/600x400/00ff0d/fff&text=Dennis',
     });
 
     await user5.setBloodType(btype1);
