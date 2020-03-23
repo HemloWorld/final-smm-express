@@ -1,7 +1,7 @@
 const connection = require('../../config/dbConn');
 const Sequelize = require('sequelize');
 
-const BloodType = connection.define('BloodType', {
+const BloodType = connection.define('bloodType', {
     id: {
         type: Sequelize.INTEGER,
         defaultValue: Sequelize.INTEGER,

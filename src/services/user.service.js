@@ -184,7 +184,7 @@ class UserService {
                         model: this.attendance,
                         separate: true,
                         order: [['date', 'desc'], ['time', 'desc']],
-                    }, this.department],
+                    }, this.department, this.bloodType, this.gender],
                 }
             );
 
