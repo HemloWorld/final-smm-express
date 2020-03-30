@@ -85,6 +85,8 @@ const dbMigrate = async () => {
     await user5.setDepartment(depart1);
     await user5.setGender(gender1);
 
+    const users = [user1, user2, user3, user4, user5];
+
     setTimeout(async () => {
         const abs1 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
         await abs1.setUser(user1);
@@ -109,6 +111,14 @@ const dbMigrate = async () => {
                                 setTimeout(async () => {
                                     const abs8 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                                     await abs8.setUser(user1);
+
+                                    let x = 0;
+                                    for (i = 0; i < 200; i++) {
+                                        await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss'), userId: users[x].id });
+                                        if (x >= users.length - 1) {
+                                            x = 0;
+                                        } else x++;
+                                    }
                                 }, 2000);
                             }, 2000);
                         }, 2000);

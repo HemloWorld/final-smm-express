@@ -1,6 +1,6 @@
 const getAll = async (req, res, service) => {
     try {
-        const result = await service.fetchAllUser();
+        const result = await service.fetchAll();
 
         res.status(200);
         res.json(result);
@@ -18,19 +18,19 @@ const getById = async (req, res, service) => {
         let result;
         switch (type) {
             case 'nfc':
-                result = await service.fetchUserByNfcId(id);
+                result = await service.fetchByNfcId(id);
                 break;
 
             case 'qr':
-                result = await service.fetchUserByQrId(id);
+                result = await service.fetchByQrId(id);
                 break;
 
             case 'name':
-                result = await service.fetchUserByName(id);
+                result = await service.fetchByName(id);
                 break;
 
             default:
-                result = await service.fetchUserById(id);
+                result = await service.fetchById(id);
                 break;
         }
 
@@ -47,31 +47,4 @@ const getById = async (req, res, service) => {
     }
 }
 
-const getByDate = async (req, res, service) => {
-    try {
-        const date = req.params.date;
-        const result = await service.fetchAbsence(date);
-
-        res.status(200);
-        res.json(result);
-    } catch (e) {
-        res.status(500);
-        res.json({ errorCode: e.message });
-    }
-}
-
-const newAbsence = async (req, res, service) => {
-    try {
-        const body = req.body;
-        const id = req.params.id;
-        const result = await service.postAbsence(body, id);
-
-        res.status(200);
-        res.json(result);
-    } catch (e) {
-        res.status(500);
-        res.json({ errorCode: e.message });
-    }
-}
-
-module.exports = { getAll, getById, getByDate, newAbsence };
+module.exports = { getAll, getById };

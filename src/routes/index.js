@@ -8,8 +8,7 @@ const noRoute = require('./no.route');
 
 
 router.use(logRoute);
-// router.use('/auth', authRoute);
-router.use('/p', userRoute);
+router.use('/u', userRoute);
 router.use('/a', attendanceRoute);
 router.use(noRoute);
 

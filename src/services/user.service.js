@@ -1,26 +1,25 @@
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const logEmitter = require('../events/logEmitter');
-const moment = require('moment');
+const Attendance = require('../models/attendance.model');
+const Gender = require('../models/gender.model');
+const BloodType = require('../models/btype.model');
+const Department = require('../models/department.model');
 
 class UserService {
-    constructor(user, bloodType, department, attendance, gender) {
+    constructor(user) {
         this.user = user;
-        this.bloodType = bloodType;
-        this.department = department;
-        this.attendance = attendance;
-        this.gender = gender;
     }
 
-    async fetchAllUser() {
+    async fetchAll() {
         try {
             const result = await this.user.findAll(
                 {
-                    include: [this.gender,
-                    this.bloodType,
-                    this.department,
+                    include: [Gender,
+                    BloodType,
+                    Department,
                     {
-                        model: this.attendance,
+                        model: Attendance,
                         separate: true,
                         order: [['date', 'desc'], ['time', 'desc']],
                     }],
@@ -40,18 +39,19 @@ class UserService {
 
     }
 
-    async fetchUserById(id) {
+    async fetchById(id) {
         try {
             const result = await this.user.findOne(
                 {
                     where: { id: id },
-                    include: [this.gender,
-                    this.bloodType,
-                    this.department,
+                    include: [Gender,
+                    BloodType,
+                    Department,
                     {
-                        model: this.attendance,
+                        model: Attendance,
                         separate: true,
                         order: [['date', 'desc'], ['time', 'desc']],
+                        limit: 1,
                     }],
                     attributes: ['id', 'qrId',
                         'nfcId', 'name',
@@ -68,24 +68,27 @@ class UserService {
         }
     }
 
-    async fetchUserByNfcId(id) {
+    async fetchByNfcId(id) {
         try {
             const result = await this.user.findOne(
                 {
                     where: { nfcId: id },
-                    include: [this.gender,
-                    this.bloodType,
-                    this.department,
+                    include: [Gender,
+                    BloodType,
+                    Department,
                     {
-                        model: this.attendance,
+                        model: Attendance,
                         separate: true,
                         order: [['date', 'desc'], ['time', 'desc']],
+                        limit: 1,
                     }],
                     attributes: ['id', 'qrId',
                         'nfcId', 'name',
                         'birth', 'email',
                         'phone', 'photoUrl'],
                 });
+
+            console.log(result.attendances.length);
             return result;
         } catch (e) {
             logEmitter.emit('APP-ERROR', {
@@ -96,25 +99,25 @@ class UserService {
         }
     }
 
-    async fetchUserByQrId(id) {
+    async fetchByQrId(id) {
         try {
             const result = await this.user.findOne(
                 {
                     where: { qrId: id },
-                    include: [this.gender,
-                    this.bloodType,
-                    this.department,
+                    include: [Gender,
+                    BloodType,
+                    Department,
                     {
-                        model: this.attendance,
+                        model: Attendance,
                         separate: true,
                         order: [['date', 'desc'], ['time', 'desc']],
+                        limit: 1,
                     }],
                     attributes: ['id', 'qrId',
                         'nfcId', 'name',
                         'birth', 'email',
                         'phone', 'photoUrl'],
                 });
-            console.log(result);
             return result;
         } catch (e) {
             logEmitter.emit('APP-ERROR', {
@@ -125,49 +128,7 @@ class UserService {
         }
     }
 
-    async fetchAbsence(date) {
-        try {
-            const result = await this.attendance.findAll(
-                {
-                    where: {
-                        date: {
-                            [Op.like]: `%${date}%`,
-                        }
-                    },
-                    include: { model: this.user, attributes: ['name'] },
-                }
-            );
-
-            return result;
-        } catch (e) {
-            logEmitter.emit('APP-ERROR', {
-                logTitle: "FETCH ABSENCE DATA BY DATE SERVICE FAILED",
-                logMessage: e
-            });
-            throw new Error('E205');
-        }
-    }
-
-    async postAbsence(body, id) {
-        try {
-            const result = await this.attendance.create(
-                {
-                    datetime: body.datetime,
-                    userId: id,
-                }
-            );
-
-            return result;
-        } catch (e) {
-            logEmitter.emit('APP-ERROR', {
-                logTitle: "POST NEW ABSENCE DATA SERVICE FAILED",
-                logMessage: e
-            });
-            throw new Error('E206');
-        }
-    }
-
-    async fetchUserByName(name) {
+    async fetchByName(name) {
         try {
             const result = await this.user.findAll(
                 {
@@ -181,10 +142,11 @@ class UserService {
                         'birth', 'email',
                         'phone', 'photoUrl'],
                     include: [{
-                        model: this.attendance,
+                        model: Attendance,
                         separate: true,
                         order: [['date', 'desc'], ['time', 'desc']],
-                    }, this.department, this.bloodType, this.gender],
+                        limit: 1,
+                    }, Department, BloodType, Gender],
                 }
             );
 
@@ -194,7 +156,7 @@ class UserService {
                 logTitle: "FETCH USER DATA BY NAME SERVICE FAILED",
                 logMessage: e
             });
-            throw new Error('E207');
+            throw new Error('E205');
         }
     }
 }
