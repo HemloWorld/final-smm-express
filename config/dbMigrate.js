@@ -40,7 +40,7 @@ const dbMigrate = async () => {
     const user2 = await User.create({
         name: 'Ruslan',
         birth: '2001-01-21',
-        email: 'ruslanou@gmail.com',
+        email: 'arus.tokped@gmail.com',
         phone: '089883795760',
         photoUrl: 'https://dummyimage.com/600x400/5352/fff&text=Ruslan',
     });
@@ -52,7 +52,7 @@ const dbMigrate = async () => {
     const user3 = await User.create({
         name: 'Afina',
         birth: '2003-01-02',
-        email: 'afinaisme@gmail.com',
+        email: 'afnpd03@gmail.com',
         phone: '08986783623',
         photoUrl: 'https://dummyimage.com/600x400/786/fff&text=Afina',
     });
