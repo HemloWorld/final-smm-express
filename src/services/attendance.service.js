@@ -44,7 +44,6 @@ class AttendanceService {
                     offset: limit * offset,
                 }
             );
-            // console.log(moment("2012-02", "YYYY-MM").daysInMonth());
             return result;
         } catch (e) {
             logEmitter.emit('APP-ERROR', {

@@ -91,13 +91,13 @@ const dbMigrate = async () => {
         const abs1 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
         await abs1.setUser(user1);
         setTimeout(async () => {
-            const abs2 = await Attendance.create({ date: '2020-03-04', time: moment().format('HH:mm:ss') });
+            const abs2 = await Attendance.create({ date: '2020-04-01', time: moment().format('HH:mm:ss') });
             await abs2.setUser(user2);
             setTimeout(async () => {
                 const abs3 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                 await abs3.setUser(user3);
                 setTimeout(async () => {
-                    const abs4 = await Attendance.create({ date: '2020-03-01', time: moment().format('HH:mm:ss') });
+                    const abs4 = await Attendance.create({ date: '2020-04-01', time: moment().format('HH:mm:ss') });
                     await abs4.setUser(user4);
                     setTimeout(async () => {
                         const abs5 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
@@ -112,13 +112,13 @@ const dbMigrate = async () => {
                                     const abs8 = await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss') });
                                     await abs8.setUser(user1);
 
-                                    let x = 0;
-                                    for (i = 0; i < 200; i++) {
-                                        await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss'), userId: users[x].id });
-                                        if (x >= users.length - 1) {
-                                            x = 0;
-                                        } else x++;
-                                    }
+                                    // let x = 0;
+                                    // for (i = 0; i < 200; i++) {
+                                    //     await Attendance.create({ date: moment().format('YYYY-MM-DD'), time: moment().format('HH:mm:ss'), userId: users[x].id });
+                                    //     if (x >= users.length - 1) {
+                                    //         x = 0;
+                                    //     } else x++;
+                                    // }
                                 }, 2000);
                             }, 2000);
                         }, 2000);
