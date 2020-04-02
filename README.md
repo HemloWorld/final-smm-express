@@ -21,6 +21,7 @@
 - DB_PORT = 3306
 - DB_HOST = 127.0.0.1
 - DB_TYPE = mysql
+- TOKEN_EXPIRY = 30d
 
 NOTE: if you are planning to use SQLite, leave the NODE_ENV as it is.
 However if you wanted to use MySQL change NODE_ENV to 'production' and change everything starting with
