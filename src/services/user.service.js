@@ -16,13 +16,13 @@ class UserService {
             const result = await this.user.findAll(
                 {
                     include: [Gender,
-                    BloodType,
-                    Department,
-                    {
-                        model: Attendance,
-                        separate: true,
-                        order: [['date', 'desc'], ['time', 'desc']],
-                    }],
+                        BloodType,
+                        Department,
+                        {
+                            model: Attendance,
+                            separate: true,
+                            order: [['date', 'desc'], ['time', 'desc']],
+                        }],
                     attributes: ['id', 'qrId',
                         'nfcId', 'name',
                         'birth', 'email',
@@ -45,14 +45,14 @@ class UserService {
                 {
                     where: { id: id },
                     include: [Gender,
-                    BloodType,
-                    Department,
-                    {
-                        model: Attendance,
-                        separate: true,
-                        order: [['date', 'desc'], ['time', 'desc']],
-                        limit: 1,
-                    }],
+                        BloodType,
+                        Department,
+                        {
+                            model: Attendance,
+                            separate: true,
+                            order: [['date', 'desc'], ['time', 'desc']],
+                            limit: 1,
+                        }],
                     attributes: ['id', 'qrId',
                         'nfcId', 'name',
                         'birth', 'email',
@@ -74,21 +74,20 @@ class UserService {
                 {
                     where: { nfcId: id },
                     include: [Gender,
-                    BloodType,
-                    Department,
-                    {
-                        model: Attendance,
-                        separate: true,
-                        order: [['date', 'desc'], ['time', 'desc']],
-                        limit: 1,
-                    }],
+                        BloodType,
+                        Department,
+                        {
+                            model: Attendance,
+                            separate: true,
+                            order: [['date', 'desc'], ['time', 'desc']],
+                            limit: 1,
+                        }],
                     attributes: ['id', 'qrId',
                         'nfcId', 'name',
                         'birth', 'email',
                         'phone', 'photoUrl'],
                 });
 
-            console.log(result.attendances.length);
             return result;
         } catch (e) {
             logEmitter.emit('APP-ERROR', {
@@ -105,14 +104,14 @@ class UserService {
                 {
                     where: { qrId: id },
                     include: [Gender,
-                    BloodType,
-                    Department,
-                    {
-                        model: Attendance,
-                        separate: true,
-                        order: [['date', 'desc'], ['time', 'desc']],
-                        limit: 1,
-                    }],
+                        BloodType,
+                        Department,
+                        {
+                            model: Attendance,
+                            separate: true,
+                            order: [['date', 'desc'], ['time', 'desc']],
+                            limit: 1,
+                        }],
                     attributes: ['id', 'qrId',
                         'nfcId', 'name',
                         'birth', 'email',
@@ -160,5 +159,4 @@ class UserService {
         }
     }
 }
-
 module.exports = UserService;

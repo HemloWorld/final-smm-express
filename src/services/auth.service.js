@@ -28,10 +28,10 @@ class AuthService {
                     email: authUser.email,
                     token: accessToken,
                 }
-                return authUser;
             } else {
-                return authUser = null;
+                authUser = null;
             }
+            return authUser;
         } catch (e) {
             logEmitter.emit('APP-ERROR', {
                 logTitle: "AUTH SERVICE FAILED",

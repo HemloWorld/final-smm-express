@@ -30,6 +30,7 @@ const dbMigrate = async () => {
         birth: '2000-12-14',
         email: 'r.arswendo.r@gmail.com',
         phone: '08986995760',
+        livingPartner: "Bambang",
         photoUrl: 'https://dummyimage.com/600x400/000/fff&text=Rio',
     });
 
@@ -42,6 +43,7 @@ const dbMigrate = async () => {
         birth: '2001-01-21',
         email: 'arus.tokped@gmail.com',
         phone: '089883795760',
+        livingPartner: "Bambang",
         photoUrl: 'https://dummyimage.com/600x400/5352/fff&text=Ruslan',
     });
 
@@ -54,6 +56,7 @@ const dbMigrate = async () => {
         birth: '2003-01-02',
         email: 'afnpd03@gmail.com',
         phone: '08986783623',
+        livingPartner: "Bambang",
         photoUrl: 'https://dummyimage.com/600x400/786/fff&text=Afina',
     });
 
@@ -66,6 +69,7 @@ const dbMigrate = async () => {
         birth: '1994-10-09',
         email: 'aris@gmail.com',
         phone: '08986938760',
+        livingPartner: "Bambang",
         photoUrl: 'https://dummyimage.com/600x400/9999/fff&text=Aris',
     });
 
@@ -78,6 +82,7 @@ const dbMigrate = async () => {
         birth: '2000-02-12',
         email: 'dennis@gmail.com',
         phone: '089868463923',
+        livingPartner: "Bambang",
         photoUrl: 'https://dummyimage.com/600x400/00ff0d/fff&text=Dennis',
     });
 

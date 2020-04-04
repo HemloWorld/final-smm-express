@@ -2,10 +2,10 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const logEmitter = require('../events/logEmitter');
 const User = require('../models/user.model');
-const Gender = require('../models/gender.model');
-const BloodType = require('../models/btype.model');
-const Department = require('../models/department.model');
-const moment = require('moment');
+// const Gender = require('../models/gender.model');
+// const BloodType = require('../models/btype.model');
+// const Department = require('../models/department.model');
+// const moment = require('moment');
 
 class AttendanceService {
     constructor(attendance) {
@@ -58,7 +58,8 @@ class AttendanceService {
         try {
             const result = await this.attendance.create(
                 {
-                    datetime: body.datetime,
+                    date: body.date,
+                    time: body.time,
                     userId: id,
                 }
             );
