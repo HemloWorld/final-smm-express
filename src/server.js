@@ -9,6 +9,7 @@ app.use(appMiddleware);
 app.use(routeIndex);
 
 const server = http.createServer(app);
+const io = require('socket.io')(server);
 server.on('error', function(ev) {
     logEmitter.emit('APP-ERROR', {
         logTitle: "SERVER ERROR",
@@ -16,4 +17,4 @@ server.on('error', function(ev) {
     });
 });
 
-module.exports = server;
+module.exports = {server, io};

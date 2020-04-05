@@ -10,7 +10,7 @@ const tokenValidation = require('../middlewares/token.validation');
 
 const {getAll, getById} = require('../controllers/user.controller');
 
-router.use(tokenValidation);
+// router.use(tokenValidation);
 router.get('/', (req, res) => getAll(req, res, userService));
 router.get('/:id/:type', (req, res) => getById(req, res, userService));
 
